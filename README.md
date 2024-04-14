@@ -59,3 +59,5 @@ This searches through devnet.xrplwin.com only requesting JSON documents. This al
 index.html and styles.css show how a non-commandline interface could look for Crypto Voting.
 
 Check it out at https://csterlent.github.io/CryptoVoting/
+
+Thanks HackKU!
