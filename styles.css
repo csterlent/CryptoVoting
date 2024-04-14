@@ -1,0 +1,121 @@
+/* Resetting default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Setting body styling*/
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+/*Setting overall navbar styling*/
+#navbar {
+    background-color: #1753EF;
+    color: #FFFFFF;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow to navbar */
+}
+
+/*Styling the header in navbar*/
+#navbar h1 {
+    margin-bottom: 10px;
+    letter-spacing: 3px;
+    padding-right: 15px;
+}
+
+/*Removing bullet points from list*/
+nav ul {
+    list-style-type: none;
+}
+
+/*Setting the list horizontal*/
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+/*Setting styles of the links in list*/
+nav ul li a {
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+/*Change link colors on hover*/
+nav ul li a:hover {
+    color: #f0f0f0; 
+}
+/*This is the end of navbar styles*/
+
+/*Styling blocks in container*/
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 40px;
+}
+
+/*Giving base styles for both blocks*/
+#left-block,
+#right-block {
+    width: 45%;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 0 10px;
+}
+
+/*Aligning left and right blocks accordingly*/
+#left-block {
+    text-align: left;
+}
+
+#right-block {
+    text-align: center;
+}
+
+/*Adding styles for user data inputs*/
+.user-input form {
+    text-align: left;
+}
+
+.user-input label {
+    display: block;
+    margin-top: 20px;
+}
+
+.user-input input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.user-input input[type="submit"] {
+    background-color: #1753EF;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.user-input input[type="submit"]:hover {
+    background-color: #0C2A8A;
+}
+
+/* Footer styling */
+footer {
+    background-color: #1753EF;
+    color: #FFFFFF; 
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 40px;
+}
