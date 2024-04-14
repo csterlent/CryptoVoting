@@ -11,8 +11,11 @@ First, a user submits a transaction labeled as an election. The important inform
 An election transaction has 4 special memos, and an optional fifth to give a description. The MemoData in the first four memos of an election transaction are as follows:
 
 At index zero, "313C7170" (The magic bytes signifying an election transaction)
+
 At index one, a hex-encoded list containing the addresses of all the voters who may vote in the election. There should be a newline between each address.
+
 At index two, the start time of the voting period in the same format as ledger close times. This is written in decimal, with a possible "0" at front to even out the number of digits.
+
 At index three, the end time of the voting period in the same format.
 
 This can be done using
@@ -26,7 +29,9 @@ Where secretkeyfile contains the election submitter's secret key and voteraddres
 Votes are also represented as transactions with special memos.
 
 At index zero, "1337B07E" (The magic bytes)
+
 At index one, the hash of the election transaction that the user is voting on.
+
 At index two, the user's vote as a hex-encoded string.
 
 To submit a vote, run:
