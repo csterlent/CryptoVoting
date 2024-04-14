@@ -78,7 +78,7 @@ async function main() {
     inverse = {};
     for (key in chosen) {
       if (inverse[chosen[key]] == undefined) {
-        inverse[chosen[key]] = 0;
+        inverse[chosen[key]] = 1;
       }
       else {
         inverse[chosen[key]]++;
@@ -120,4 +120,4 @@ async function main() {
   });
 
 }
-await main();
+main();
