@@ -6,6 +6,10 @@ if (process.argv.length < 3) {
 }
 const election_hash = process.argv[2];
 
+function getXrpTime() {
+  return Math.floor(new Date().getTime()/1000 - 946681200 - 3600);
+}
+
 async function main() {
   let url = "https://devnet.xrplwin.com/tx/" + election_hash + ".json";
   let election_trans = await (await fetch(url)).json();
@@ -24,7 +28,14 @@ async function main() {
   const start_time = parseInt(election_trans.result.Memos[2].Memo.MemoData);
   const end_time = parseInt(election_trans.result.Memos[3].Memo.MemoData);
   const chosen = {};
-  console.log(voters_addrs, start_time, end_time);
+  if (election_trans.result.Memos.length > 4)
+    console.log(hexDecode(election_trans.result.Memos[4].Memo.MemoData))
+  console.log("Start of voting period: " + start_time);
+  console.log("End of voting period: " + end_time);
+  console.log("Time right now: " + getXrpTime());
+  console.log("Addresses of voters:");
+  console.log(voters_addrs);
+  console.log();
 
   // found a website for exploring the devnet ledger
   // the page uses a websocket to get raw ledger data and I will too
@@ -32,7 +43,6 @@ async function main() {
   // enough trans thoughts, its time for transactions
   // gets called every transaction within the voting period, in reverse order
   function process_transaction(trans) {
-    console.log()
     if (!trans.Memos || trans.Memos.length < 3) {
       return;
     }
@@ -43,12 +53,10 @@ async function main() {
     if (hexDecode(trans.Memos[1].Memo.MemoData) != election_hash) {
       return;
     }
-    console.log(trans.Memos[0].Memo.MemoData);
     // Check if this voter is allowed in this election
     if (voters_addrs.indexOf(trans.Account) == -1) {
       return;
     }
-    console.log(trans.Memos[0].Memo.MemoData);
     let vote = hexDecode(trans.Memos[2].Memo.MemoData);
     console.log(trans.Account, vote);
     chosen[trans.Account] = vote;
@@ -65,7 +73,20 @@ async function main() {
 
   // gets called when all transactions have been processed in the window
   function finalize() {
-    console.log(chosen);
+    console.log();
+    console.log("Num\tOption");
+    inverse = {};
+    for (key in chosen) {
+      if (inverse[chosen[key]] == undefined) {
+        inverse[chosen[key]] = 0;
+      }
+      else {
+        inverse[chosen[key]]++;
+      }
+    }
+    for (key in inverse) {
+      console.log(inverse[key] + "\t" + key);
+    }
   }
 
   let sock = new WebSocket("wss://s.devnet.rippletest.net:51233/");
@@ -83,8 +104,6 @@ async function main() {
           process_transaction(trans);
         }
       }
-      console.log(x.result.ledger.parent_close_time);
-      console.log(x.result.ledger.close_time);
       if (parseInt(x.result.ledger.parent_close_time) > start_time) {
         ledger -= 1;
         sock.send(ledger_json(ledger));
@@ -101,4 +120,4 @@ async function main() {
   });
 
 }
-main();
+await main();

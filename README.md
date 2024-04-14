@@ -24,6 +24,8 @@ This can be done using
 
 Where secretkeyfile contains the election submitter's secret key and voteraddressfile contains the addresses of all voters on separate lines.
 
+The output of this command shows information about the transaction, where the user can find the hash of the transaction that was submitted.
+
 ## Voting
 
 Votes are also represented as transactions with special memos.
@@ -40,9 +42,13 @@ To submit a vote, run:
 
 For this one, secretkey comes from the command, not a file.
 
+The output of the command also shows information about the transaction, but it should not normally be necessary.
+
 ## Tallying
 
-Tallying is meant for anyone to be able to do, even those who did not submit the election or vote. Tallying an election involves inspecting all ledgers that were closed during the election's voting period. To tally an election, run
+Tallying is meant for anyone to be able to do, even those who did not submit the election or vote. Tallying an election involves inspecting all ledgers that were closed during the election's voting period.  A voter can only vote once! The only vote that will be counted during tallying is the voter's first vote.
+
+To tally an election, run
 
 `node tally.mjs <electionhash>`
 
@@ -51,3 +57,5 @@ This searches through devnet.xrplwin.com only requesting JSON documents. This al
 ## Webpage
 
 index.html and styles.css show how a non-commandline interface could look for Crypto Voting.
+
+Check it out at https://csterlent.github.io/CryptoVoting/

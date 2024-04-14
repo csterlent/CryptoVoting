@@ -92,7 +92,6 @@ async function main() {
   let signed = wallet.sign(election)
 
   console.log(await client.submitAndWait(signed.tx_blob));
-  console.log(2);
 }
 
 main();
