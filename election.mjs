@@ -91,7 +91,10 @@ async function main() {
   });
   let signed = wallet.sign(election)
 
-  console.log(await client.submitAndWait(signed.tx_blob));
+  let x = await client.submitAndWait(signed.tx_blob);
+  console.log(election.Memos);
+  console.log(x.result.hash);
+  return;
 }
 
-main();
+main()
